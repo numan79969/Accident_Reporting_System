@@ -1,10 +1,15 @@
+import subprocess, sys, os
+
+# Auto-install dependencies before importing anything else
+from requirements_installer import install_requirements
+install_requirements()
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from app.routes import auth, accidents, admin, notifications
 from app.database.database import engine
 from app.models import models
-import os
 
 models.Base.metadata.create_all(bind=engine)
 
