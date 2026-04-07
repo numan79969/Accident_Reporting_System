@@ -1,8 +1,9 @@
 import subprocess, sys, os
 
 # Auto-install dependencies before importing anything else
-from requirements_installer import install_requirements
-install_requirements()
+requirements_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "requirements.txt")
+if os.path.exists(requirements_path):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", requirements_path, "-q"])
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
